@@ -4,18 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My College Projects</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
   <style>
     /* Global Styles */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f7f7f7;
       color: #333;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     html {
       scroll-behavior: smooth; /* Enable smooth scrolling */
+    }
+
+    /* Dark Mode */
+    body.dark-mode {
+      background-color: #2c3e50;
+      color: white;
     }
 
     header {
@@ -27,9 +41,12 @@
 
     /* Navbar Styles */
     nav {
+      position: sticky;
+      top: 0;
       background-color: #2c3e50;
       padding: 10px 0;
       text-align: center;
+      z-index: 1000;
     }
 
     nav ul {
@@ -50,38 +67,35 @@
 
     nav ul li a:hover {
       text-decoration: underline;
+      color: #2980b9;
     }
 
-    /* Responsive Design */
-    @media screen and (max-width: 768px) {
-      nav ul {
-        text-align: center;
-        padding: 0;
-      }
-
-      nav ul li {
-        display: block;
-        margin: 10px 0;
-      }
-
-      header h1 {
-        font-size: 2.5rem;
-      }
-
-      header p {
-        font-size: 1rem;
-      }
-
-      .container {
-        padding: 1rem;
-      }
-
-      .video-wrapper iframe {
-        width: 100%;
-      }
+    /* Hero Section */
+    #hero {
+      background-image: url('your-image.jpg'); 
+      height: 400px;
+      background-size: cover;
+      color: white;
+      text-align: center;
+      padding: 100px 0;
     }
 
-    /* Project Styles */
+    #hero .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #hero h1 {
+      font-size: 3rem;
+    }
+
+    #hero p {
+      font-size: 1.2rem;
+    }
+
+    /* Project Section */
     .container {
       padding: 2rem;
       max-width: 1000px;
@@ -94,6 +108,8 @@
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       padding: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
     }
 
     .project h2 {
@@ -116,10 +132,79 @@
       height: 100%;
     }
 
+    /* Animation for fade-in effect */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Light/Dark Mode Button */
+    .theme-toggle {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .theme-toggle button {
+      padding: 10px 20px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .theme-toggle button:hover {
+      background-color: #1f618d;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* Social Media Icons */
+    .social-media {
+      list-style-type: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-media li {
+      font-size: 1.5rem;
+    }
+
+    .social-media li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .social-media li a:hover {
+      color: #2980b9;
+    }
   </style>
 </head>
 
 <body>
+  <!-- Theme Toggle Button -->
+  <div class="theme-toggle">
+    <button id="toggle-theme">Toggle Dark Mode</button>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="overlay">
+      <h1>Welcome to My Portfolio</h1>
+      <p>Explore my video editing and sound design work</p>
+    </div>
+  </section>
+
   <!-- Navbar -->
   <nav>
     <ul>
@@ -146,6 +231,7 @@
   <!-- Projects Section -->
   <section id="projects">
     <div class="container">
+      <!-- Project 1 -->
       <div class="project">
         <h2>My Edited Film</h2>
         <p>This project shows off my video editing and sound design work.</p>
@@ -154,10 +240,10 @@
         </div>
       </div>
 
+      <!-- Project 2 -->
       <div class="project">
         <h2>My Edited Video (MP4)</h2>
         <p>This project shows my edited video, embedded from a local file.</p>
-        <!-- Embed a local video -->
         <video width="100%" controls>
           <source src="videos/Bubbels_2_low.mp4" type="video/mp4">
           Your browser does not support the video tag.
@@ -171,12 +257,24 @@
     <div class="container">
       <h2>Contact Me</h2>
       <p>You can reach me at my email or through social media!</p>
+      <ul class="social-media">
+        <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a></li>
+        <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
+      </ul>
     </div>
   </section>
 
-  <!-- Footer (Optional) -->
+  <!-- Footer -->
   <footer>
     <p>© 2025 Your Name • All Rights Reserved</p>
   </footer>
+
+  <!-- JavaScript for Dark Mode Toggle -->
+  <script>
+    document.getElementById("toggle-theme").addEventListener("click", function() {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
 </body>
 </html>
